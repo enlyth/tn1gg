@@ -21,3 +21,7 @@ yarn build
 ```
 
 Build by running `npm run build` or `yarn build`
+
+## License
+
+MIT

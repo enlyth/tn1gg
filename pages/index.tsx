@@ -47,7 +47,7 @@ export default function Home() {
           <LinkBox
             title="Minecraft"
             description={
-              <>
+              <div className="dark:text-neutral-100 text-neutral-800">
                 <p>Play with us on our Minecraft server!</p>
                 <div className="py-4">
                   <div className="w-full border-t border-neutral-400 dark:border-neutral-700"></div>
@@ -56,7 +56,7 @@ export default function Home() {
                 <code className="rounded mx-1 mt-1 px-2 py-1 bg-indigo-600 text-neutral-100">
                   minecraft.tn1.gg
                 </code>
-              </>
+              </div>
             }
           >
             <MinecraftLogo size={128} />

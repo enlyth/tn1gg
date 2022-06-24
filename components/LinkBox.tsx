@@ -24,11 +24,11 @@ export const LinkBox: React.FC<IProps> = ({
           {children}
         </div>
       </div>
-      <h4 className="bg-indigo-500 dark:bg-indigo-700 p-3 text-2xl text-neutral-100 font-light">
+      <h4 className="bg-indigo-500 dark:bg-indigo-700 p-3 text-2xl text-neutral-100">
         {title}
       </h4>
-      <div className="flex items-center justify-center px-6 py-4 text-center w-80 bg-slate-200 dark:bg-neutral-800 transition hover:ease-out hover:ease-in h-full">
-        <p className="mt-4 mb-2 text-neutral-800 dark:text-neutral-100">
+      <div className="flex items-center justify-center px-6 py-4 text-center w-80 bg-slate-300 dark:bg-neutral-800 transition hover:ease-out hover:ease-in h-full">
+        <p className="mt-4 mb-2 text-slate-800 dark:text-neutral-100 font-semibold">
           {description}
         </p>
       </div>
