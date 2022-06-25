@@ -30,4 +30,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "/home/runner/work/tn1gg/tn1gg/out/"
           target: "/var/www/tn1gg/"
-          strip_components: 2
+          strip_components: 3
