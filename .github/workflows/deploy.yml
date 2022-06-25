@@ -30,4 +30,3 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "${{ env.GITHUB_WORKSPACE }}/out/*"
           target: "/var/www/tn1gg"
-          # strip_components: 5
