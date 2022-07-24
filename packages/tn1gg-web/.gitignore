@@ -36,8 +36,3 @@ yarn-error.log*
 
 #vscode
 .vscode
-
-lerna-debug.log
-
-packages/**/node_modules
-packages/**/dist

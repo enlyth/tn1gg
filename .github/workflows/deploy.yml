@@ -1,11 +1,11 @@
 name: Deploy
 on:
   push:
-    branches: [master]
+    branches: [master, "deploy-test/**"]
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-web:
+    name: Deploy Website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,6 +16,7 @@ jobs:
           node-version: 16
       - name: Build
         run: |
+          cd packages/tn1gg-web
           npm install -g yarn
           yarn install --frozen-lockfile
           yarn build
@@ -28,6 +29,62 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "/home/runner/work/tn1gg/tn1gg/out/"
-          target: "/var/www/tn1gg/"
-          strip_components: 3
+          source: "/home/runner/work/tn1gg/tn1gg/packages/tn1gg-web/"
+          target: "/var/www/tn1gg-web/"
+          strip_components: 4
+
+      - name: Run SSH Commands
+        uses: arthurvanl/action-exec-ssh@v2.0.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          commands: |
+            cd /var/www/tn1gg-web/
+            pm2 start ecosystem.config.js
+  deploy-api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Build
+        run: |
+          cd packages/tn1gg-api
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
+          ls -lah
+
+      - name: Create .env file
+        run: |
+          cd packages/tn1gg-api
+          touch .env
+          echo PORT=4118 >> .env
+          echo UI_URLS=https://tn1.gg,https://www.tn1.gg >> .env
+          cat .env
+
+      - name: Deploy via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "/home/runner/work/tn1gg/tn1gg/packages/tn1gg-api/"
+          target: "/var/www/tn1gg-api/"
+          strip_components: 4
+
+      - name: Run SSH Commands
+        uses: arthurvanl/action-exec-ssh@v2.0.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          commands: |
+            cd /var/www/tn1gg-api/
+            pm2 start ecosystem.config.js

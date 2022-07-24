@@ -1,14 +1,17 @@
-TN1.gg landing page, built with NextJS and TailwindCSS.
+TN1.gg
 
-For now, it is a completely static page so we use the undocumented `unstable_runtimeJS` feature to exclude any runtime javascript.
+- UI
+  - NextJS
+  - TailwindCSS
+- API
+  - Apollo GraphQL
 
 ## Getting started
 
 ```bash
-npm i
-npm run dev
-# or
+npm i -g lerna
 yarn
+lerna bootstrap
 yarn dev
 ```
 
@@ -16,11 +19,9 @@ yarn dev
 
 ```bash
 npm run build
-# or
-yarn build
 ```
 
-Build by running `npm run build` or `yarn build`
+Build by running or `yarn build`
 
 ## License
 
