@@ -1,9 +1,11 @@
 TN1.gg
 
-- UI
+This is a monorepo containing all the public TN1.gg code.
+
+- UI (https://tn1.gg)
   - NextJS
   - TailwindCSS
-- API
+- API (https://api.tn1.gg)
   - Apollo GraphQL
 
 ## Getting started
@@ -15,13 +17,11 @@ lerna bootstrap
 yarn dev
 ```
 
-## Building for production
+## Deployment
 
-```bash
-npm run build
-```
+The Github Actions deployment script takes care of everything. We build, inject environment variables, copy files to the server, and run the services using PM2 installed on the VPS.
 
-Build by running or `yarn build`
+The services are reverse proxied with a custom NGINX configuration installed on the machine (not dockerized). We use Certbot for HTTPS.
 
 ## License
 
