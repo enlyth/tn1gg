@@ -22,6 +22,14 @@ jobs:
           yarn build
           ls -lah
 
+      - name: Create .env file
+        run: |
+          cd packages/tn1gg-web
+          touch .env
+          echo NEXT_PUBLIC_PORT=4117 >> .env
+          echo NEXT_PUBLIC_GRAPQL_ENDPOINT=https://api.tn1.gg >> .env
+          cat .env
+
       - name: Deploy via SSH
         uses: appleboy/scp-action@master
         with:
@@ -42,6 +50,7 @@ jobs:
           commands: |
             cd /var/www/tn1gg-web/
             pm2 start ecosystem.config.js
+
   deploy-api:
     name: Deploy API
     runs-on: ubuntu-latest

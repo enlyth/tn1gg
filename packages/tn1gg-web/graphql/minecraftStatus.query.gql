@@ -1,0 +1,11 @@
+query minecraftStatus {
+  minecraftStatus {
+    online
+    name
+    players
+    maxPlayers
+    version
+    ping
+    lastUpdated
+  }
+}
