@@ -11,7 +11,18 @@ export const typeDefs = gql`
     lastUpdated: Float
   }
 
+  type NewsItem {
+    title: String!
+    link: String!
+    guid: String!
+    description: String
+    pubDate: String!
+    author: String!
+    keywords: [String]
+  }
+
   type Query {
     minecraftStatus: MinecraftStatus!
+    news: [NewsItem]!
   }
 `;

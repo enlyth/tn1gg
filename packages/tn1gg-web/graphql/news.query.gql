@@ -1,0 +1,11 @@
+query news {
+  news {
+    title
+    link
+    pubDate
+    description
+    guid
+    keywords
+    author
+  }
+}
