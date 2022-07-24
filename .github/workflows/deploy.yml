@@ -4,7 +4,7 @@ on:
     branches: [master, "task/**"]
 
 jobs:
-  deploy:
+  deploy-web:
     name: Deploy Website
     runs-on: ubuntu-latest
     steps:
@@ -40,9 +40,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           commands: |
-              cd /var/www/tn1gg-web/
-              pm2 start ecosystem.config.js
-
+            cd /var/www/tn1gg-web/
+            pm2 start ecosystem.config.js
+  deploy-api:
     name: Deploy API
     runs-on: ubuntu-latest
     steps:
@@ -85,5 +85,5 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           commands: |
-              cd /var/www/tn1gg-api/
-              pm2 start ecosystem.config.js
+            cd /var/www/tn1gg-api/
+            pm2 start ecosystem.config.js
