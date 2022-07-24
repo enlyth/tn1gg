@@ -8,7 +8,8 @@
   "main": "./src/index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev ./src/index.ts"
+    "dev": "ts-node-dev ./src/index.ts",
+    "build": "tsc --project ./tsconfig.json --outDir dist"
   },
   "dependencies": {
     "apollo-server": "^3.9.0",
