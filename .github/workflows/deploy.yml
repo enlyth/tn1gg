@@ -64,7 +64,7 @@ jobs:
         run: |
           touch .env
           echo PORT=4118 >> .env
-          cat UI_URLS=https://tn1.gg,https://www.tn1.gg >> .env
+          echo UI_URLS=https://tn1.gg,https://www.tn1.gg >> .env
           cat .env
 
       - name: Deploy via SSH
