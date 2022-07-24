@@ -1,10 +1,10 @@
 import React from "react";
 
 interface IProps {
-  size: number;
+  size?: number;
 }
 
-export const GitHubLogo: React.FC<IProps> = ({ size }) => {
+export const GitHubLogo: React.FC<IProps> = ({ size = 24 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

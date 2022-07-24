@@ -3,8 +3,9 @@ import { DiscordLogo } from "../components/logos/DiscordLogo";
 import { RedditLogo } from "../components/logos/RedditLogo";
 import { MinecraftLogo } from "../components/logos/MinecraftLogo";
 import { LinkBox } from "../components/LinkBox";
+import { Navigation } from "../components/layout/Navigation";
 import Head from "next/head";
-import { GitHubLogo } from "../icons/GitHub";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -12,14 +13,11 @@ export default function Home() {
       <Head>
         <title>TN1.gg | Tunbridge Wells</title>
         <meta name="description" content="TN1.gg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="flex flex-col items-end w-full bg-indigo-600 py-2 px-3 shadow-md">
-        <a href="#" target="_blank" rel="nofollow">
-          <GitHubLogo size={32} />
-        </a>
-      </div>
+      <Navigation />
       <main className="flex flex-col items-center justify-center w-full flex-1 px-8 text-center">
+        <Image src="/logo.png" alt="logo" height={256} width={256}></Image>
         <h1 className="text-2xl m-6 text-neutral-200">
           Welcome to{" "}
           <span className="text-indigo-500 font-semibold">TN1.gg</span>, the
