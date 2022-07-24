@@ -3,10 +3,9 @@ import { DiscordLogo } from "../components/logos/DiscordLogo";
 import { RedditLogo } from "../components/logos/RedditLogo";
 import { MinecraftLogo } from "../components/logos/MinecraftLogo";
 import { LinkBox } from "../components/LinkBox";
+import { Navigation } from "../components/layout/Navigation";
 import Head from "next/head";
-import { GitHubLogo } from "../icons/GitHub";
 import Image from "next/image";
-import { ExternalLink } from "../icons/ExternalLink";
 
 export default function Home() {
   return (
@@ -16,26 +15,7 @@ export default function Home() {
         <meta name="description" content="TN1.gg" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="flex flex-row justify-between items-end w-full bg-indigo-600 py-2 px-3 shadow-md">
-        <Image src="/logo.png" alt="logo" height={24} width={24}></Image>
-        <div className="flex flex-row items-center">
-          <a href="https://api.tn1.gg" target="_blank" rel="noreferrer">
-            <div className="flex flex-row items-center bg-indigo-400 px-2 py-1 mx-4 rounded hover:bg-indigo-300 transition:ease-in-out duration-300">
-              <span className="font-semibold text-sm text-white mr-2">
-                GraphQL API
-              </span>{" "}
-              <ExternalLink size={16} />
-            </div>
-          </a>
-          <a
-            href="https://github.com/enlyth/tn1gg"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GitHubLogo size={24} />
-          </a>
-        </div>
-      </div>
+      <Navigation />
       <main className="flex flex-col items-center justify-center w-full flex-1 px-8 text-center">
         <Image src="/logo.png" alt="logo" height={256} width={256}></Image>
         <h1 className="text-2xl m-6 text-neutral-200">
