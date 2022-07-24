@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useMinecraftStatusQuery } from "../../graphql/generated/schema";
 import { Button } from "../generic/Button";
 
@@ -11,15 +11,7 @@ interface IProps {
 const POLL_INTERVAL_MS = 10000;
 
 export const MinecraftModal: React.FC<IProps> = ({ isOpen, onClose }) => {
-  const { data, startPolling, stopPolling } = useMinecraftStatusQuery();
-
-  useEffect(() => {
-    startPolling(POLL_INTERVAL_MS);
-
-    return () => {
-      stopPolling();
-    };
-  }, [startPolling, stopPolling]);
+  const { data, refetch } = useMinecraftStatusQuery();
 
   const [copyText, setCopyText] = useState("Copy");
 
@@ -65,7 +57,7 @@ export const MinecraftModal: React.FC<IProps> = ({ isOpen, onClose }) => {
                       minecraft.tn1.gg
                     </code>
                     <span
-                      className="text-neutral-200 text-sm cursor-pointer bg-indigo-600 rounded px-2 py-1"
+                      className="text-neutral-200 text-sm cursor-pointer bg-indigo-600 rounded px-2 py-1 hover:bg-indigo-400 transition:ease-in-out duration-200"
                       onClick={() => {
                         setCopyText("Copied!");
                         navigator.clipboard.writeText("minecraft.tn1.gg");
@@ -97,19 +89,29 @@ export const MinecraftModal: React.FC<IProps> = ({ isOpen, onClose }) => {
                       </p>
                     </li>
                     <li className="my-2">
-                      <p className="text-sm text-neutral-200">
-                        Last updated:{" "}
-                        {data?.minecraftStatus?.lastUpdated
-                          ? new Date(
-                              data?.minecraftStatus?.lastUpdated
-                            ).toLocaleString()
-                          : "Unknown"}
+                      <p className="flex flex-row items-center justify-between text-sm text-neutral-200">
+                        <span>
+                          Last updated:{" "}
+                          {data?.minecraftStatus?.lastUpdated
+                            ? new Date(
+                                data?.minecraftStatus?.lastUpdated
+                              ).toLocaleString()
+                            : "Unknown"}
+                        </span>
+                        <span
+                          className="ml-2 text-neutral-200 text-sm cursor-pointer bg-indigo-600 rounded px-2 py-1 hover:bg-indigo-400 transition:ease-in-out duration-200"
+                          onClick={() => {
+                            refetch();
+                          }}
+                        >
+                          Refresh
+                        </span>
                       </p>
                     </li>
                   </ul>
                 </div>
                 <hr className="border-neutral-700 border-1 mt-4" />
-                <div className="mt-4 flex items-end justify-end">
+                <div className="mt-4 flex">
                   <Button onClick={() => onClose()}>
                     <span className="text-neutral-200">Got it, thanks!</span>
                   </Button>
