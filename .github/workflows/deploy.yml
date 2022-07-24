@@ -1,7 +1,7 @@
 name: Deploy
 on:
   push:
-    branches: [master, "deploy-test/**"]
+    branches: [master]
 
 jobs:
   deploy-web:
