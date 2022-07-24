@@ -20,7 +20,15 @@ const server = new ApolloServer({
   introspection: true,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   cors: {
-    origin: UI_URLS,
+    origin: (origin, cb) => {
+      if (origin && UI_URLS.includes(origin)) {
+        cb(null, origin);
+      } else {
+        cb(null, "*");
+      }
+      return origin;
+    },
+    credentials: true,
   },
 });
 
