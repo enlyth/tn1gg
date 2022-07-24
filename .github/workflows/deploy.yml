@@ -31,7 +31,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "/home/runner/work/tn1gg/tn1gg/packages/tn1gg-web/"
           target: "/var/www/tn1gg-web/"
-          strip_components: 5
+          strip_components: 4
 
       - name: Run SSH Commands
         uses: arthurvanl/action-exec-ssh@v2.0.7
@@ -74,9 +74,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "/home/runner/work/tn1gg/tn1gg/packages/tn1gg-api/dist/"
+          source: "/home/runner/work/tn1gg/tn1gg/packages/tn1gg-api/"
           target: "/var/www/tn1gg-api/"
-          strip_components: 5
+          strip_components: 4
 
       - name: Run SSH Commands
         uses: arthurvanl/action-exec-ssh@v2.0.7
