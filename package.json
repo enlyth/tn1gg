@@ -2,8 +2,7 @@
   "name": "tn1gg",
   "private": false,
   "devDependencies": {
-    "lerna": "^5.1.6",
-    "nx": "^14.3.6"
+    "lerna": "^5.2.0"
   },
   "dependencies": {
     "concurrently": "^7.2.2"
