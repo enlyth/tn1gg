@@ -6,7 +6,7 @@ import { ApolloServer } from "apollo-server";
 
 dotenv.config();
 
-const PORT = process.env.port || 4111;
+const PORT = process.env.PORT || 4111;
 const UI_URLS = process.env.UI_URLS?.split(",") || ["http://localhost:3000"];
 
 console.log(`UI_URLS: ${UI_URLS}`);
