@@ -14,13 +14,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Build
-        run: |
-          cd packages/tn1gg-web
-          npm install -g yarn
-          yarn install --frozen-lockfile
-          yarn build
-          ls -lah
 
       - name: Create .env file
         run: |
@@ -29,6 +22,14 @@ jobs:
           echo NEXT_PUBLIC_PORT=4117 >> .env
           echo NEXT_PUBLIC_GRAPQL_ENDPOINT=https://api.tn1.gg >> .env
           cat .env
+
+      - name: Build
+        run: |
+          cd packages/tn1gg-web
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
+          ls -lah
 
       - name: Deploy via SSH
         uses: appleboy/scp-action@master
