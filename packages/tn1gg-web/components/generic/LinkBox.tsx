@@ -20,7 +20,7 @@ export const LinkBox: React.FC<IProps> = ({
       onClick={onClick}
       target={link ? "_blank" : undefined}
       rel={"noopener noreferrer"}
-      className="flex flex-col rounded-lg shadow-md overflow-hidden group hover:scale-105 transition hover:ease-in-out"
+      className="flex flex-col rounded-lg shadow-md overflow-hidden group hover:scale-105 transition hover:ease-in-out cursor-pointer"
     >
       <div className="px-2 text-center w-80 bg-indigo-600 transition hover:ease-in-out h-full group-hover:bg-indigo-500">
         <div className="m-12 flex items-center justify-center rounded-full group-hover:scale-110 transition hover:ease-in-out">
