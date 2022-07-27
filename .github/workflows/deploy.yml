@@ -68,6 +68,7 @@ jobs:
           cd packages/tn1gg-api
           touch .env
           echo PORT=4118 >> .env
+          echo MINECRAFT_SERVER=minecraft.tn1.gg >> .env
           echo UI_URL=https://tn1.gg >> .env
           cat .env
 
