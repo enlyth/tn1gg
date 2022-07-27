@@ -7,7 +7,7 @@ export const News = () => {
   const news = data?.news;
 
   return (
-    <div className="bg-neutral-800 p-4 flex flex-col items-center justify-center flex-wrap max-w-8xl mt-8 sm:w-full rounded-lg min-h-[320px]">
+    <div className="bg-neutral-800 p-4 flex flex-col items-center justify-center flex-wrap max-w-8xl mt-8 sm:w-full rounded-lg min-h-[320px] shadow-md">
       {loading && (
         <div className="flex items-center gap-2 text-neutral-200">
           <span className="h-6 w-6 block rounded-full border-4 border-t-neutral-600 animate-spin"></span>
