@@ -22,13 +22,13 @@ export const LinkBox: React.FC<IProps> = ({
       rel={"noopener noreferrer"}
       className="flex flex-col rounded-lg shadow-md overflow-hidden group hover:scale-105 transition hover:ease-in-out cursor-pointer"
     >
-      <div className="px-2 text-center w-80 bg-indigo-600 transition hover:ease-in-out h-full group-hover:bg-indigo-500">
+      <div className="px-2 text-center bg-indigo-600 transition hover:ease-in-out h-full group-hover:bg-indigo-500">
         <div className="m-12 flex items-center justify-center rounded-full group-hover:scale-110 transition hover:ease-in-out">
           {children}
         </div>
       </div>
-      <h4 className="bg-indigo-700 p-3 text-2xl text-neutral-100">{title}</h4>
-      <div className="flex items-center justify-center px-6 py-4 text-center w-80 bg-neutral-800 transition hover:ease-in-out h-full">
+      {/* <h4 className="bg-neutral-600 p-3 text-2xl text-neutral-100">{title}</h4> */}
+      <div className="flex items-center justify-center px-6 py-4 text-center bg-neutral-800 transition hover:ease-in-out h-full w-full">
         <div className="mt-4 mb-2 text-neutral-100 font-semibold">
           {description}
         </div>

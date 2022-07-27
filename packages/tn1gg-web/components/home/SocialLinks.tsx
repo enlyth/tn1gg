@@ -9,7 +9,7 @@ export const SocialLinks = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-wrap gap-8 justify-center max-w-8xl mt-6 sm:w-full">
+    <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 mt-6 w-full">
       <LinkBox
         title="Discord"
         link="https://discord.gg/pdV2whK9uv"

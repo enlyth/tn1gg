@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { ExternalLink } from "../../icons/ExternalLink";
 import { GitHubLogo } from "../../icons/GitHub";
+import { Mail } from "../../icons/Mail";
 import { Button } from "../generic/Button";
 
 export const Navigation: React.FC = () => {
@@ -15,6 +16,14 @@ export const Navigation: React.FC = () => {
         objectFit="contain"
       />
       <div className="flex flex-row items-center">
+        <a href="https://webmail.tn1.gg" target="_blank" rel="noreferrer">
+          <Button className="mr-2">
+            <span className="font-semibold text-sm text-white mr-2">
+              Webmail
+            </span>{" "}
+            <Mail size={16} />
+          </Button>
+        </a>
         <a href="https://api.tn1.gg" target="_blank" rel="noreferrer">
           <Button className="mr-2">
             <span className="font-semibold text-sm text-white mr-2">
@@ -23,14 +32,16 @@ export const Navigation: React.FC = () => {
             <ExternalLink size={16} />
           </Button>
         </a>
+        <Button className="mr-2">
+          <span className="font-semibold text-sm text-white mr-2">GitHub</span>{" "}
+          <GitHubLogo size={16} />
+        </Button>
         <a
           href="https://github.com/enlyth/tn1gg"
           target="_blank"
           rel="noreferrer"
           className="hover:bg-indigo-300 transition:ease-in-out duration-200 rounded-full bg-indigo-700"
-        >
-          <GitHubLogo size={24} />
-        </a>
+        ></a>
       </div>
     </div>
   );

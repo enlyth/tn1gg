@@ -7,9 +7,9 @@ import { ApolloServer } from "apollo-server";
 dotenv.config();
 
 const PORT = process.env.PORT || 4111;
-const UI_URLS = process.env.UI_URLS?.split(",") || ["http://localhost:3000"];
+const UI_URL = process.env.UI_URL || ["http://localhost:4117"];
 
-console.log(`UI_URLS: ${UI_URLS}`);
+console.log(`UI_URLS: ${UI_URL}`);
 console.log(`PORT: ${PORT}`);
 
 const server = new ApolloServer({
@@ -20,14 +20,7 @@ const server = new ApolloServer({
   introspection: true,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   cors: {
-    origin: (origin, cb) => {
-      if (origin && UI_URLS.includes(origin)) {
-        cb(null, origin);
-      } else {
-        cb(null, "*");
-      }
-      return origin;
-    },
+    origin: UI_URL,
     credentials: true,
   },
 });
