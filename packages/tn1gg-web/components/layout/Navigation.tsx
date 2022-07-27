@@ -32,16 +32,20 @@ export const Navigation: React.FC = () => {
             <ExternalLink size={16} />
           </Button>
         </a>
-        <Button className="mr-2">
-          <span className="font-semibold text-sm text-white mr-2">GitHub</span>{" "}
-          <GitHubLogo size={16} />
-        </Button>
+
         <a
           href="https://github.com/enlyth/tn1gg"
           target="_blank"
           rel="noreferrer"
           className="hover:bg-indigo-300 transition:ease-in-out duration-200 rounded-full bg-indigo-700"
-        ></a>
+        >
+          <Button className="mr-2">
+            <span className="font-semibold text-sm text-white mr-2">
+              GitHub
+            </span>{" "}
+            <GitHubLogo size={16} />
+          </Button>
+        </a>
       </div>
     </div>
   );
