@@ -9,8 +9,6 @@ export default function Home() {
     <>
       <Head>
         <title>TN1.gg | Tunbridge Wells</title>
-        <meta name="description" content="TN1.gg" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 pb-8">
         <Navigation />
