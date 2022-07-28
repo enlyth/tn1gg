@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         domain="tn1.gg"
         customDomain="https://analytics.tn1.gg"
         selfHosted
+        trackOutboundLinks
         // enabled // by default it's enabled if NODE_ENV is "production"
       >
         <Component {...pageProps} />
