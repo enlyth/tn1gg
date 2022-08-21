@@ -3,6 +3,7 @@ import { Navigation } from "../components/layout/Navigation";
 import Head from "next/head";
 import { SocialLinks } from "../components/home/SocialLinks";
 import { News } from "../components/home/News";
+import { Weather } from "../components/home/Weather";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
               online community for Tunbridge Wells.
             </h1>
             <SocialLinks />
+            <Weather />
             <News />
           </div>
         </main>

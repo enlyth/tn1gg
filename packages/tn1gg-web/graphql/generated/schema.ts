@@ -15,6 +15,22 @@ export type Scalars = {
   Float: number;
 };
 
+export type DailyWeather = {
+  __typename?: 'DailyWeather';
+  precipitation_sum: Array<Scalars['Float']>;
+  temperature_2m_max: Array<Scalars['Float']>;
+  temperature_2m_min: Array<Scalars['Float']>;
+  time: Array<Scalars['String']>;
+};
+
+export type DailyWeatherInfo = {
+  __typename?: 'DailyWeatherInfo';
+  precipitation_sum: Scalars['String'];
+  temperature_2m_max: Scalars['String'];
+  temperature_2m_min: Scalars['String'];
+  time: Scalars['String'];
+};
+
 export type MinecraftStatus = {
   __typename?: 'MinecraftStatus';
   lastUpdated?: Maybe<Scalars['Float']>;
@@ -41,6 +57,18 @@ export type Query = {
   __typename?: 'Query';
   minecraftStatus: MinecraftStatus;
   news: Array<Maybe<NewsItem>>;
+  weather: Weather;
+};
+
+export type Weather = {
+  __typename?: 'Weather';
+  daily: DailyWeather;
+  daily_units: DailyWeatherInfo;
+  elevation: Scalars['Float'];
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  timezone: Scalars['String'];
+  timezone_abbreviation: Scalars['String'];
 };
 
 export type MinecraftStatusQueryVariables = Exact<{ [key: string]: never; }>;
@@ -52,6 +80,11 @@ export type NewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, link: string, pubDate: string, description?: string | null, guid: string, keywords?: Array<string | null> | null, author: string } | null> };
+
+export type WeatherQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WeatherQuery = { __typename?: 'Query', weather: { __typename?: 'Weather', timezone: string, timezone_abbreviation: string, latitude: number, longitude: number, elevation: number, daily: { __typename?: 'DailyWeather', time: Array<string>, temperature_2m_min: Array<number>, temperature_2m_max: Array<number>, precipitation_sum: Array<number> }, daily_units: { __typename?: 'DailyWeatherInfo', time: string, temperature_2m_min: string, temperature_2m_max: string, precipitation_sum: string } } };
 
 
 export const MinecraftStatusDocument = gql`
@@ -134,3 +167,53 @@ export function useNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewsQ
 export type NewsQueryHookResult = ReturnType<typeof useNewsQuery>;
 export type NewsLazyQueryHookResult = ReturnType<typeof useNewsLazyQuery>;
 export type NewsQueryResult = Apollo.QueryResult<NewsQuery, NewsQueryVariables>;
+export const WeatherDocument = gql`
+    query weather {
+  weather {
+    timezone
+    timezone_abbreviation
+    latitude
+    longitude
+    daily {
+      time
+      temperature_2m_min
+      temperature_2m_max
+      precipitation_sum
+    }
+    elevation
+    daily_units {
+      time
+      temperature_2m_min
+      temperature_2m_max
+      precipitation_sum
+    }
+  }
+}
+    `;
+
+/**
+ * __useWeatherQuery__
+ *
+ * To run a query within a React component, call `useWeatherQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWeatherQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWeatherQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useWeatherQuery(baseOptions?: Apollo.QueryHookOptions<WeatherQuery, WeatherQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<WeatherQuery, WeatherQueryVariables>(WeatherDocument, options);
+      }
+export function useWeatherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WeatherQuery, WeatherQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<WeatherQuery, WeatherQueryVariables>(WeatherDocument, options);
+        }
+export type WeatherQueryHookResult = ReturnType<typeof useWeatherQuery>;
+export type WeatherLazyQueryHookResult = ReturnType<typeof useWeatherLazyQuery>;
+export type WeatherQueryResult = Apollo.QueryResult<WeatherQuery, WeatherQueryVariables>;

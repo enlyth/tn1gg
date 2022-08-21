@@ -16,19 +16,27 @@ export const Navigation: React.FC = () => {
         objectFit="contain"
       />
       <div className="flex flex-row items-center">
-        <a href="https://webmail.tn1.gg" target="_blank" rel="noreferrer">
-          <Button className="mr-2">
+        <a
+          href="https://webmail.tn1.gg"
+          target="_blank"
+          rel="noreferrer"
+          className="mr-2"
+        >
+          <Button>
             <span className="font-semibold text-sm text-white mr-2">
               Webmail
             </span>{" "}
             <Mail size={16} />
           </Button>
         </a>
-        <a href="https://api.tn1.gg" target="_blank" rel="noreferrer">
-          <Button className="mr-2">
-            <span className="font-semibold text-sm text-white mr-2">
-              GraphQL API
-            </span>{" "}
+        <a
+          href="https://api.tn1.gg"
+          target="_blank"
+          rel="noreferrer"
+          className="mr-2"
+        >
+          <Button>
+            <span className="font-semibold text-sm text-white mr-2">API</span>{" "}
             <ExternalLink size={16} />
           </Button>
         </a>
@@ -37,9 +45,9 @@ export const Navigation: React.FC = () => {
           href="https://github.com/enlyth/tn1gg"
           target="_blank"
           rel="noreferrer"
-          className="hover:bg-indigo-300 transition:ease-in-out duration-200 rounded-full bg-indigo-700"
+          className="mr-2"
         >
-          <Button className="mr-2">
+          <Button>
             <span className="font-semibold text-sm text-white mr-2">
               GitHub
             </span>{" "}

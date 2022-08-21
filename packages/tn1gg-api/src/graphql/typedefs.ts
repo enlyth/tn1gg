@@ -24,5 +24,30 @@ export const typeDefs = gql`
   type Query {
     minecraftStatus: MinecraftStatus!
     news: [NewsItem]!
+    weather: Weather!
+  }
+
+  type DailyWeatherInfo {
+    time: String!
+    temperature_2m_min: String!
+    temperature_2m_max: String!
+    precipitation_sum: String!
+  }
+
+  type DailyWeather {
+    time: [String!]!
+    temperature_2m_min: [Float!]!
+    temperature_2m_max: [Float!]!
+    precipitation_sum: [Float!]!
+  }
+
+  type Weather {
+    latitude: Float!
+    longitude: Float!
+    timezone: String!
+    timezone_abbreviation: String!
+    elevation: Float!
+    daily_units: DailyWeatherInfo!
+    daily: DailyWeather!
   }
 `;

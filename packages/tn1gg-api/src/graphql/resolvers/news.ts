@@ -10,6 +10,7 @@ interface INewsItemXML {
   author: string;
   category: string;
   "media:keywords": string;
+  "dc:creator"?: string;
 }
 interface INewsCache {
   lastUpdated: number;
@@ -19,6 +20,7 @@ interface INewsCache {
 const NEWS_ENDPOINTS = [
   "https://www.kentlive.news/news/?service=rss",
   "https://www.kentonline.co.uk/_api/rss/kent_online_news_feed.xml",
+  // "https://rss.app/feeds/uoZ9pfnWbjcFr2ro.xml",
 ];
 const CACHE_TTL_MS = 1000 * 60 * 10; // 10 minutes
 
@@ -28,6 +30,9 @@ const newsCache: INewsCache = {
 };
 
 function formatMediaItem(item: INewsItemXML) {
+  if (item["dc:creator"]) {
+    item.author = item["dc:creator"];
+  }
   return {
     ...item,
     pubDate: new Date(item.pubDate).toISOString(),

@@ -1,0 +1,21 @@
+query weather {
+  weather {
+    timezone
+    timezone_abbreviation
+    latitude
+    longitude
+    daily {
+      time
+      temperature_2m_min
+      temperature_2m_max
+      precipitation_sum
+    }
+    elevation
+    daily_units {
+      time
+      temperature_2m_min
+      temperature_2m_max
+      precipitation_sum
+    }
+  }
+}
