@@ -12,7 +12,7 @@ export const News = () => {
       {loading && <Loading />}
       {error && <div>Failed to load news feed.</div>}
       {news && (
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 w-full text-left max-h-[620px] overflow-y-scroll overflow-x-hidden scrollbar pr-2">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 w-full text-left max-h-[540px] overflow-y-scroll overflow-x-hidden scrollbar pr-2">
           {news.map((newsItem) => (
             <a
               href={newsItem!.link}

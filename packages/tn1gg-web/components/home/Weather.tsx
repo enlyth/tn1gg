@@ -36,18 +36,18 @@ export const Weather = () => {
             className="flex flex-col text-white bg-neutral-700 p-3 rounded-md justify-between w-[128px]"
             key={`weather-${i}`}
           >
-            <div className="font-bold text-lg">
-              {Math.round(data.weather.daily.temperature_2m_max[i])}°C
-            </div>
-            {!!data.weather.daily.precipitation_sum[i] && (
-              <div>☔{data.weather.daily.precipitation_sum[i]}mm</div>
-            )}
             <div>
               {new Date(time).toLocaleDateString("en-GB", {
                 weekday: "short",
                 day: "numeric",
                 month: "short",
               })}
+            </div>
+            {!!data.weather.daily.precipitation_sum[i] && (
+              <div>☔{data.weather.daily.precipitation_sum[i]}mm</div>
+            )}
+            <div className="font-bold text-lg">
+              {Math.round(data.weather.daily.temperature_2m_max[i])}°C
             </div>
           </div>
         ))}
