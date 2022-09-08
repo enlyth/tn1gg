@@ -9,6 +9,7 @@ module.exports = {
       // interpreter: "node",
       // interpreter: "/home/enlyth/.nvm/versions/node/v16.16.0/bin/node",
       interpreter: "/root/.nvm/versions/node/v16.16.0/bin/node",
+      log_date_format: "YYYY-MM-DD HH:mm Z",
     },
   ],
 };

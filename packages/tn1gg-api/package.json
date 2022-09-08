@@ -13,8 +13,13 @@
   },
   "dependencies": {
     "apollo-server": "^3.10.1",
+    "apollo-server-core": "^3.10.2",
+    "apollo-server-express": "^3.10.2",
     "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "fast-xml-parser": "^4.0.9",
     "graphql": "^16.6.0",
     "mcstatus": "^1.0.1"
