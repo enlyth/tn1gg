@@ -8,7 +8,9 @@ import express from "express";
 import http from "http";
 import https from "https";
 import cors from "cors";
-import bodyParser from "body-parser";
+// @ts-ignore
+import { bodyParserGraphQL } from "body-parser-graphql";
+
 import {
   isValidSignature,
   NotificationBody,
@@ -28,7 +30,7 @@ console.log(`UI_URLS: ${UI_URL}`);
 console.log(`PORT: ${PORT}`);
 
 const app = express();
-app.use(bodyParser.text({ type: "*/*" }));
+app.use(bodyParserGraphQL());
 app.use(
   cors({
     origin: UI_URL,
@@ -40,8 +42,7 @@ const httpServer = http.createServer(app);
 
 app.post("/roadworks", async (req, res) => {
   try {
-    console.log(req.body);
-    const body = JSON.parse(req.body);
+    const { body } = req;
     console.log(body);
     if (!req.get("x-amz-sns-message-type")) {
       console.log(`SNS: x-amz-sns-message-type missing.`);
