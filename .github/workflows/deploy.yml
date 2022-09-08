@@ -20,7 +20,7 @@ jobs:
           cd packages/tn1gg-web
           touch .env
           echo PORT=${{ secrets.UI_PORT }} >> .env
-          echo NEXT_PUBLIC_GRAPQL_ENDPOINT=https://api.tn1.gg >> .env
+          echo NEXT_PUBLIC_GRAPQL_ENDPOINT=https://api.tn1.gg/graphql >> .env
           cat .env
 
       - name: Build
