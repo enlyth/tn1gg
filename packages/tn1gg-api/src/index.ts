@@ -8,8 +8,6 @@ import express from "express";
 import http from "http";
 import https from "https";
 import cors from "cors";
-// @ts-ignore
-import { bodyParserGraphQL } from "body-parser-graphql";
 
 import {
   isValidSignature,
@@ -30,7 +28,7 @@ console.log(`UI_URLS: ${UI_URL}`);
 console.log(`PORT: ${PORT}`);
 
 const app = express();
-app.use(bodyParserGraphQL());
+
 app.use(
   cors({
     origin: UI_URL,
@@ -40,26 +38,32 @@ app.use(
 
 const httpServer = http.createServer(app);
 
-app.post("/roadworks", async (req, res) => {
-  try {
-    const { body } = req;
-    console.log(body);
-    if (!req.get("x-amz-sns-message-type")) {
-      console.log(`SNS: x-amz-sns-message-type missing.`);
-      res.end();
-      return;
-    }
+app.post("/roadworks", (req, res) => {
+  var chunks: string[] = [];
+  req.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+  req.on("end", async function () {
+    try {
+      var message = JSON.parse(chunks.join(""));
+      console.log(message);
+      if (!req.get("x-amz-sns-message-type")) {
+        console.log(`SNS: x-amz-sns-message-type missing.`);
+        res.end();
+        return;
+      }
 
-    if (await isValidSignature(body)) {
-      handleMessage(body);
-      res.end();
-    } else {
-      throw "Message signature is not valid";
+      if (await isValidSignature(message)) {
+        handleMessage(message);
+        res.end();
+      } else {
+        throw "Message signature is not valid";
+      }
+    } catch (err) {
+      console.error(err);
+      res.json({ error: err instanceof Error ? err.message : String(err) });
     }
-  } catch (err) {
-    console.error(err);
-    res.json({ error: err instanceof Error ? err.message : String(err) });
-  }
+  });
 });
 
 function handleMessage(body: NotificationBody) {
