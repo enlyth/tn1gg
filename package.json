@@ -1,8 +1,11 @@
 {
   "name": "tn1gg",
-  "private": false,
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "lerna": "^5.2.0"
+    "lerna": "^5.4.3"
   },
   "dependencies": {
     "concurrently": "^7.2.2"
