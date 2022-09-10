@@ -8,14 +8,12 @@ import express from "express";
 import http from "http";
 import cors from "cors";
 import { roadworksEndpoint } from "./message-service/roadworks";
+import { postToDevChannel } from "./webhooks/discord";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4111;
 const UI_URL = process.env.UI_URL || ["http://localhost:4117"];
-
-console.log(`UI_URLS: ${UI_URL}`);
-console.log(`PORT: ${PORT}`);
 
 const app = express();
 
@@ -48,7 +46,8 @@ async function startApolloServer() {
   await new Promise<void>((resolve) =>
     httpServer.listen({ port: PORT }, resolve)
   );
-  console.log(
+
+  postToDevChannel(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   );
 }

@@ -2,6 +2,8 @@ import https from "https";
 
 import { Request, Response } from "express";
 import { isValidSignature } from "./messageValidator";
+import { postToDevChannel } from "../webhooks/discord";
+import { errorHandler } from "../error/errorHandler";
 
 export enum SNSMessageType {
   SubscriptionConfirmation = "SubscriptionConfirmation",
@@ -38,7 +40,7 @@ export function roadworksEndpoint(req: Request, res: Response) {
     try {
       const message = JSON.parse(chunks.join("")) as ISNSMessage;
       if (!req.get("x-amz-sns-message-type")) {
-        console.log(`SNS: x-amz-sns-message-type missing.`);
+        postToDevChannel(`SNS: x-amz-sns-message-type missing.`);
         res.end();
         return;
       }
@@ -50,8 +52,8 @@ export function roadworksEndpoint(req: Request, res: Response) {
         throw "Message signature is not valid";
       }
     } catch (err) {
-      console.error(err);
-      res.json({ error: err instanceof Error ? err.message : String(err) });
+      errorHandler(err);
+      res.json({ error: err instanceof Error ? err.message : err });
     }
   });
 }
@@ -71,13 +73,12 @@ function handleMessage(body: ISNSMessage) {
 
 function confirmSubscription(subscriptionUrl: string) {
   https.get(subscriptionUrl);
-  console.log("Subscription confirmed");
+  postToDevChannel("SNS: Subscription confirmed");
 }
 
 function handleNotification(body: ISNSMessage) {
   // For now, just log stuff relevant to TW, we don't do anything with it yet
-  if (body.Message.toLowerCase().includes("tunbridge wells")) {
-    console.log(body.Message);
+  if (body.Message.toUpperCase().includes("TUNBRIDGE WELLS")) {
+    postToDevChannel(`Received message from SNS: ${body.Message}`);
   }
-  console.log(`Received message from SNS: ${body.Message}`);
 }

@@ -70,6 +70,9 @@ jobs:
           echo PORT=4118 >> .env
           echo MINECRAFT_SERVER=minecraft.tn1.gg >> .env
           echo UI_URL=https://tn1.gg >> .env
+          echo DISCORD_WEBHOOK_ID=${{ secrets.DISCORD_WEBHOOK_ID }} >> .env
+          echo DISCORD_WEBHOOK_TOKEN=${{ secrets.DISCORD_WEBHOOK_TOKEN }} >> .env
+          echo ENV=production >> .env
           cat .env
 
       - name: Build

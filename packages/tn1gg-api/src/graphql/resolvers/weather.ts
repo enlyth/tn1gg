@@ -1,4 +1,5 @@
 import axios from "axios";
+import { errorHandler } from "../../error/errorHandler";
 
 const WEATHER_ENDPOINT = (lat: number, lng: number) =>
   `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe/London`;
@@ -19,7 +20,7 @@ export const weatherQueryResolvers = {
       const data = response.data;
       return data;
     } catch (error) {
-      console.error(error);
+      errorHandler(error);
       return [];
     }
   },

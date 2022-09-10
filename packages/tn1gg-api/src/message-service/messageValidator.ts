@@ -2,6 +2,7 @@ import crypto from "crypto";
 import axios from "axios";
 import url from "url";
 import { ISNSMessage } from "./roadworks";
+import { errorHandler } from "../error/errorHandler";
 
 export async function isValidSignature(body: ISNSMessage) {
   verifyMessageSignatureVersion(parseInt(body.SignatureVersion, 10));
@@ -29,7 +30,7 @@ async function downloadCertificate(certURL: string) {
     const response = await axios.get(certURL);
     return response.data;
   } catch (err) {
-    throw `Error fetching certificate: ${err}`;
+    errorHandler(err);
   }
 }
 

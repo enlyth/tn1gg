@@ -1,5 +1,7 @@
 import axios from "axios";
 import { XMLParser, XMLValidator } from "fast-xml-parser";
+import { errorHandler } from "../../error/errorHandler";
+import { postToDevChannel } from "../../webhooks/discord";
 
 interface INewsItemXML {
   title: string;
@@ -76,7 +78,7 @@ export const newsQueryResolvers = {
       return newsCache.news;
     } catch (error) {
       // Some kind of error reporting, maybe to a Discord webhook
-      console.error(error);
+      errorHandler(error);
       return [];
     }
   },
