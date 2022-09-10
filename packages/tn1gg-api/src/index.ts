@@ -6,18 +6,8 @@ import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import express from "express";
 import http from "http";
-import https from "https";
 import cors from "cors";
-
-import {
-  isValidSignature,
-  NotificationBody,
-} from "./message-service/messageValidator";
-
-enum MessageType {
-  SubscriptionConfirmation = "SubscriptionConfirmation",
-  Notification = "Notification",
-}
+import { roadworksEndpoint } from "./message-service/roadworks";
 
 dotenv.config();
 
@@ -38,55 +28,7 @@ app.use(
 
 const httpServer = http.createServer(app);
 
-app.post("/roadworks", (req, res) => {
-  var chunks: string[] = [];
-  req.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-  req.on("end", async function () {
-    try {
-      var message = JSON.parse(chunks.join(""));
-      console.log(message);
-      if (!req.get("x-amz-sns-message-type")) {
-        console.log(`SNS: x-amz-sns-message-type missing.`);
-        res.end();
-        return;
-      }
-
-      if (await isValidSignature(message)) {
-        handleMessage(message);
-        res.end();
-      } else {
-        throw "Message signature is not valid";
-      }
-    } catch (err) {
-      console.error(err);
-      res.json({ error: err instanceof Error ? err.message : String(err) });
-    }
-  });
-});
-
-function handleMessage(body: NotificationBody) {
-  switch (body.Type) {
-    case MessageType.SubscriptionConfirmation:
-      confirmSubscription(body.SubscribeURL as string);
-      break;
-    case MessageType.Notification:
-      handleNotification(body);
-      break;
-    default:
-      return;
-  }
-}
-
-function confirmSubscription(subscriptionUrl: string) {
-  https.get(subscriptionUrl);
-  console.log("Subscription confirmed");
-}
-
-function handleNotification(body: NotificationBody) {
-  console.log(`Received message from SNS: ${body.Message}`);
-}
+app.post("/roadworks", roadworksEndpoint);
 
 async function startApolloServer() {
   const server = new ApolloServer({

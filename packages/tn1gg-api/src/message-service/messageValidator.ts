@@ -1,11 +1,10 @@
 import crypto from "crypto";
 import axios from "axios";
 import url from "url";
+import { ISNSMessage } from "./roadworks";
 
-export type NotificationBody = Record<string, number | string>;
-
-export async function isValidSignature(body: NotificationBody) {
-  verifyMessageSignatureVersion(body.SignatureVersion as number);
+export async function isValidSignature(body: ISNSMessage) {
+  verifyMessageSignatureVersion(parseInt(body.SignatureVersion, 10));
 
   const certificate = await downloadCertificate(body.SigningCertURL as string);
   return validateSignature(body, certificate);
@@ -35,17 +34,17 @@ async function downloadCertificate(certURL: string) {
 }
 
 async function validateSignature(
-  message: NotificationBody,
+  message: ISNSMessage,
   certificate: crypto.KeyLike
 ) {
   const verify = crypto.createVerify("sha1WithRSAEncryption");
   verify.write(getMessageToSign(message));
   verify.end();
 
-  return verify.verify(certificate, message.Signature as string, "base64");
+  return verify.verify(certificate, message.Signature, "base64");
 }
 
-function getMessageToSign(body: NotificationBody) {
+function getMessageToSign(body: ISNSMessage) {
   switch (body.Type) {
     case "SubscriptionConfirmation":
       return buildSubscriptionStringToSign(body);
@@ -56,7 +55,7 @@ function getMessageToSign(body: NotificationBody) {
   }
 }
 
-function buildNotificationStringToSign(body: NotificationBody) {
+function buildNotificationStringToSign(body: ISNSMessage) {
   let stringToSign = "";
 
   stringToSign = "Message\n";
@@ -77,7 +76,7 @@ function buildNotificationStringToSign(body: NotificationBody) {
   return stringToSign;
 }
 
-function buildSubscriptionStringToSign(body: NotificationBody) {
+function buildSubscriptionStringToSign(body: ISNSMessage) {
   let stringToSign = "";
 
   stringToSign = "Message\n";
