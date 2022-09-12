@@ -2,8 +2,9 @@ import https from "https";
 
 import { Request, Response } from "express";
 import { isValidSignature } from "./messageValidator";
-import { postToDevChannel } from "../webhooks/discord";
+import { postEventToWebhook, postToDevChannel } from "../webhooks/discord";
 import { errorHandler } from "../error/errorHandler";
+import { RoadworksEventMessage } from "./event";
 
 export enum SNSMessageType {
   SubscriptionConfirmation = "SubscriptionConfirmation",
@@ -78,7 +79,10 @@ function confirmSubscription(subscriptionUrl: string) {
 
 function handleNotification(body: ISNSMessage) {
   // For now, just log stuff relevant to TW, we don't do anything with it yet
-  if (body.Message.toUpperCase().includes("TUNBRIDGE WELLS")) {
-    postToDevChannel(`Received message from SNS: ${body.Message}`);
+
+  const event = JSON.parse(body.Message) as RoadworksEventMessage;
+
+  if (event.object_data.town.toUpperCase().includes("TUNBRIDGE WELLS")) {
+    postEventToWebhook(event);
   }
 }
