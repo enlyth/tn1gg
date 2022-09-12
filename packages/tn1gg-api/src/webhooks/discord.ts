@@ -31,6 +31,7 @@ const getEventColor = (event: RoadworksEventMessage) => {
     case EventType.WorkStartReverted:
     case EventType.WorkStopReverted:
     case EventType.PermitAlterationGranted:
+    case EventType.WorkStopReverted:
     case EventType.ActivityUpdated:
       return 0xffff70;
     case EventType.ActivityCancelled:
@@ -42,7 +43,6 @@ const getEventColor = (event: RoadworksEventMessage) => {
     case EventType.PermitGranted:
     case EventType.PermitSubmitted:
     case EventType.ActivityCreated:
-    case EventType.WorkStopReverted:
       return 0x00ff70;
     default:
       return 0x000000;

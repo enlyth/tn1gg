@@ -47,9 +47,15 @@ async function startApolloServer() {
     httpServer.listen({ port: PORT }, resolve)
   );
 
-  postToDevChannel(
-    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  );
+  if (process.env.ENV === "production") {
+    postToDevChannel(
+      `🚀 Server ready at https://api.tn1.gg${server.graphqlPath} [${process.env.ENV}]`
+    );
+  } else {
+    console.log(
+      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath} [${process.env.ENV}]`
+    );
+  }
 }
 
 startApolloServer();
